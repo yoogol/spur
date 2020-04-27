@@ -1,1 +1,1 @@
-web: gunicorn bot:app
+web: gunicorn spur.wsgi --log-file -
