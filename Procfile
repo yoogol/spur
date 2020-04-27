@@ -1,1 +1,1 @@
-web: gunicorn todoapp
+web: gunicorn Spur.wsgi
