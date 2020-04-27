@@ -133,13 +133,27 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
 
+STATIC_URL = '/static/'
+
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = os.environ["SENDGRID_API_KEY"]
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ["SENDGRID_API_KEY"]
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Spur <yulia.shea@gmail.com>'
+
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Heroku: Update database configuration from $DATABASE_URL.
 # https://devcenter.heroku.com/articles/heroku-postgresql
