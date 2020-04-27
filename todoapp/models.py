@@ -4,6 +4,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
+from django.db.models.signals import post_save
 
 class UserInfo(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='userinfo')
@@ -102,3 +103,6 @@ class Task(models.Model):
             task.save()
             counter = counter + 1
 
+@receiver(post_save, sender=User)
+def save_user_info(sender, instance, **kwargs):
+    instance.userinfo.save()
