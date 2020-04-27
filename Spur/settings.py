@@ -26,7 +26,7 @@ SECRET_KEY = 'u%))vibpr+i1r5_*y6d9-e5f$27(d59dn7c_nd*qo02-($+%hq'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'spurring.herokuapp.com', '127.0.0.1'
+    'murmuring-peak-80277.herokuapp.com', '127.0.0.1'
 ]
 
 
