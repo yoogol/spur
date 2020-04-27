@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+{% block content %}
+    <div class="page projects">
+        <div class="drawer-horizontal">
+            <div class="goal">
+                <div class="title">{{ goal.name }}</div>
+                <div class="subtitle">to achive this I will:</div>
+            </div>
+            <div class="goal-score">
+                {{ goal.order_number }}
+            </div>
+        </div>
+        <div class="list project">
+            {% for project_data in projects_data %}
+                {% include 'todoapp/subtemplates/project.html' with project_data=project_data %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

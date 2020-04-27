@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>Spur</title>{% endblock %}
+    {% block css %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+{#        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">#}
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+{#        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.11/css/select2.min.css" rel="stylesheet" />#}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+
+        <script src="https://kit.fontawesome.com/1a3e371640.js" crossorigin="anonymous"></script>
+        <!-- Add additional CSS in static file -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'todoapp/css/styles.css' %}">
+    {% endblock %}
+</head>
+<body>
+  <div>
+    {% block navbar %}
+        <nav class="navbar navbar-expand-sm navbar-light bg-light" style="display: flex; justify-content: space-between;">
+{#            <a class="nav-item" href="#">#}
+{#                <img src="{% static 'img/Logo.png' %}" width="60" style="padding:5px" class="d-inline-block align-top" alt="">#}
+{#            </a>#}
+{#            <ul class="navbar-nav mr-auto" id="navigation">#}
+{#                {% if user.is_authenticated %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if request.path == '/' %} active {% endif %}" href="{% url 'giftsharingapp:my-gifts' %}"><i style="font-size: 30px" class="fas fa-heart"></i> <span style="font-size: 12px"  class="d-none d-sm-block">MY WISHLIST</span><span class="sr-only">(current)</span></a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if request.path == '/friends-gifts/' %} active {% endif %}" href="{% url 'giftsharingapp:friends-gifts' %}"><i style="font-size: 30px" class="fas fa-sleigh"></i> <span style="font-size: 12px" class="d-none d-sm-block">SANTA'S LIST</span></a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if request.path == '/account/' %} active {% endif %}" href="{% url 'giftsharingapp:account' %}"><i style="font-size: 30px" class="fas fa-gift"></i> <span style="font-size: 12px" class="d-none d-sm-block">MY GIFT LIST</span></a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if request.path == '/account/' %} active {% endif %}" href="{% url 'giftsharingapp:account' %}"><i style="font-size: 30px" class="fas fa-user"></i> <span style="font-size: 12px" class="d-none d-sm-block">ACCOUNT</span></a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#                <span class="navbar-toggler-icon"></span>#}
+{#            </button>#}
+            {% if user.is_authenticated %}
+                <div style="margin: 0px 30px; color: gray;">
+                    Hi, {{ user.first_name|title }}
+                </div>
+            {% endif %}
+        </nav>
+{#        {% if user.is_authenticated %}#}
+{#                {% for notification in user.userinfo.unviewed_notifications %}#}
+{#                    {% include 'giftsharingapp/menu-level-templates/subtemplates/notification.html' with notification=notification %}#}
+{#                    <div class="notification">{{ notification.message }}</div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        {% endif %}#}
+    {% endblock %}
+
+    <div class="core-element">
+      <div class="">
+          {% block content %}
+          {% endblock %}
+
+          {% block javascript %}
+                <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+                <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+{#                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/i18n/af.js"></script>#}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
+                <script type='text/javascript' src={% static 'todoapp/js/main.js' %}></script>
+          {% endblock %}
+
+{#        {% block pagination %}#}
+{#          {% if is_paginated %}#}
+{#            <div class="pagination">#}
+{#              <span class="page-links">#}
+{#                {% if page_obj.has_previous %}#}
+{#                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>#}
+{#                {% endif %}#}
+{#                <span class="page-current">#}
+{#                  <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>#}
+{#                </span>#}
+{#                {% if page_obj.has_next %}#}
+{#                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>#}
+{#                {% endif %}#}
+{#              </span>#}
+{#            </div>#}
+{#          {% endif %}#}
+{#        {% endblock %}#}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

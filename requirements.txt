@@ -1,0 +1,9 @@
+asgiref==3.2.7
+Django==3.0.5
+psycopg2==2.8.5
+python-http-client==3.2.7
+pytz==2019.3
+sendgrid==6.2.2
+six==1.14.0
+sqlparse==0.3.1
+whitenoise==5.0.1

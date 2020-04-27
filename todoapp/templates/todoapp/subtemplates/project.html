@@ -1,0 +1,35 @@
+<div class="drawer-horizontal">
+    <div class="left">
+        <div class="drawer-horizontal">
+            <div class="title">
+                {{ project_data.project.name }}
+            </div>
+            <div class="deadline">
+                {% if project_data.project.deadline %}
+                    {{ project_data.project.deadline|date:"M j" }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="drawer-horizontal">
+            <div class="subtitle">
+                by taking these steps-by-step actions:
+            </div>
+        </div>
+
+    </div>
+    <div class="right">
+{#        <i class="fas fa-chevron-down"></i>#}
+        <a href="{% url 'todoapp:add_new_task' project_id=project_data.project.id  %}">
+           <i class="fas fa-plus-circle"></i>
+        </a>
+
+
+    </div>
+</div>
+<table class="list task">
+    {% for task in project_data.tasks %}
+        {% if not task.status == "D" %}
+            {% include 'todoapp/subtemplates/task.html' with task=task %}
+        {% endif %}
+    {% endfor %}
+</table>

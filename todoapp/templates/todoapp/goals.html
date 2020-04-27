@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+    <div class="page goals">
+        <div class="title">
+            Good morning!
+        </div>
+        <div class="subtitle">
+            Stay focused on your goals
+        </div>
+        <ol class="list">
+            {% for goal in goals %}
+                <li class="item">
+                    <a href="{% url 'todoapp:show_projects_for_goal' goal_id=goal.id %}">
+                        {{ goal.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ol>
+        <div class="button-drawer">
+            <button type="button" class="btn btn-success">Conquer Today</button>
+        </div>
+        <div class="button-drawer">
+            <button type="button" class="btn btn-link">Edit Goals</button>
+        </div>
+    </div>
+
+{% endblock %}

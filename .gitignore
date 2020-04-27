@@ -1,0 +1,13 @@
+env
+*.pyc
+staticfiles
+.env
+local_settings.py
+*.py[cod]
+.idea
+venv
+files
+test_settings.py
+env2
+.DS_Store
+
