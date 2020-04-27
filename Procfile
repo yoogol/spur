@@ -1,1 +1,1 @@
-web: gunicorn spur:app
+web: gunicorn todoapp:app
