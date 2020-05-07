@@ -3,9 +3,9 @@
         <td class="checkbox">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" {% if task.status == "C" %} checked {% endif %} data-taskid="{{ task.id }}" onchange="changeTaskStatus(this)">
         </td>
-        <td class="number">
-            {{ task.order_within_project }}.
-        </td>
+{#        <td class="number">#}
+{#            {{ task.order_within_project }}.#}
+{#        </td>#}
         <td class="title">
             <span class="title-name" {% if task.status == 'C' %} style="text-decoration: line-through" {% endif %}>{{ task.name }}</span>
             <div class="detail-date">

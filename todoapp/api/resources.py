@@ -21,19 +21,23 @@ def manage_goal(request):
 
 @csrf_exempt
 def manage_project(request):
-    if request.method == 'GET':
+    response_data = {}
+    try:
         project_id = request.GET.get('project_id')
-        print("get me an project with id ", project_id )
-    if request.method == 'POST':
-        goal_id = request.POST.get('goal_id')
-        print("create a new project under goal ", goal_id)
-    if request.method == 'PUT':
-        project_id = request.PUT.get('project_id')
-        print("edit project with id ", project_id)
-    if request.method == 'DELETE':
-        project_id = request.DELETE.get('project_id')
-        print("delete project with id ", project_id)
-    return True
+        project = Project.objects.get(id=project_id)
+        if request.GET.get('type') == 'change_status':
+            project.status = request.GET.get('status')
+            project.save()
+        response_data = {
+            'status': 'ok',
+            'redirect_url': reverse_lazy('todoapp:show_projects_for_goal', kwargs={'goal_id': project.goal_id},
+                                         current_app='todoapp')
+        }
+    except:
+        response_data = {
+            'status': 'error'
+        }
+    return JsonResponse(response_data)
 
 
 @csrf_exempt
@@ -42,7 +46,6 @@ def manage_task(request):
     try:
         task_id = request.GET.get('task_id')
         task = Task.objects.get(id=task_id)
-        project_id = request.GET.get('project_id')
         if request.GET.get('type') == 'change_status':
             task.status = request.GET.get('status')
             task.save()

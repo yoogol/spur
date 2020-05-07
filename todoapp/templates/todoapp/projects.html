@@ -7,7 +7,10 @@
                 <div class="subtitle">to achive this I will:</div>
             </div>
             <div class="goal-score">
-                {{ goal.order_number }}
+{#                {{ goal.order_number }}#}
+                <a href="{% url 'todoapp:add_new_project' goal_id=goal.id  %}">
+                   <i class="fas fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <div class="list project">

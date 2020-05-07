@@ -85,13 +85,18 @@ class Task(models.Model):
             return ''
 
     def rearrange_tasks_order(self):
+        if not self.order_within_project:
+            self.order_within_project = 1
+            self.save()
         this_task_order = self.order_within_project
         all_tasks = Task.objects.filter(project=self.project, status__in=['A', 'C']).order_by(
             'order_within_project').exclude(id=self.id)
-        total_count = all_tasks.count()
-        if this_task_order > total_count:
-            this_task_order = total_count
-            self.order_within_project = total_count
+        other_tasks_count = all_tasks.count() + 1
+        print(other_tasks_count)
+        print(this_task_order)
+        if this_task_order > other_tasks_count > 0:
+            this_task_order = other_tasks_count
+            self.order_within_project = other_tasks_count
             self.save()
         counter = 1
         for task in all_tasks:

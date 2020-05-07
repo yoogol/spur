@@ -46,8 +46,9 @@
 {#            </button>#}
             {% if user.is_authenticated %}
                 <div style="margin: 0px 30px; color: gray;">
-                    Hi, {{ user.first_name|title }}
+                    <a href="{% url 'todoapp:my-goals' %}" >Hi, {{ user.first_name|title }}</a>
                 </div>
+                <button type="button" class="btn btn-light" onclick="history.back()">Back</button>
             {% endif %}
         </nav>
 {#        {% if user.is_authenticated %}#}

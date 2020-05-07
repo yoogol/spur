@@ -22,6 +22,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import Task as TaskForm
+from .forms import Project as ProjectForm
 
 
 sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
@@ -71,6 +72,26 @@ def edit_task(request, project_id=None, task_id=None):
                                 current_app='todoapp'))
     return render(request, 'todoapp/task.html', {'form': task_form, 'project_id': project_id, 'task_id': task_id})
 
+
+def edit_project(request, goal_id=None, project_id=None):
+    if request.method == 'GET':
+        if not project_id:
+            project_form = ProjectForm()
+        else:
+            project = Project.objects.get(id=project_id)
+            project_form = ProjectForm(instance=project)
+
+    elif request.method == 'POST':
+        if not project_id:
+            project = Project(goal_id=goal_id)
+        else:
+            project = Project.objects.get(id=project_id)
+        project_form = ProjectForm(request.POST,instance=project)
+        if project_form.is_valid():
+            new_project = project_form.save()
+            return HttpResponseRedirect(reverse_lazy('todoapp:show_projects_for_goal', kwargs={'goal_id': project.goal_id},
+                                                     current_app='todoapp'))
+    return render(request, 'todoapp/project.html', {'form': project_form, 'goal_id': goal_id, 'project_id': project_id})
 
 def signup(request, token=None):
     logout(request)

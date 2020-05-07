@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm, TextInput, DateInput, NumberInput, TimeInput, Select
-from .models import Task
+from .models import Task, Project
 
 
 
@@ -37,3 +37,23 @@ class Task(ModelForm):
         self.fields['order_within_project'].required = True
         self.fields['name'].required = True
         self.fields['duration_minutes'].required = True
+
+
+class Project(ModelForm):
+    class Meta:
+        model = Project
+        fields = ['name', 'deadline', 'goal_kudos', 'status']
+        widgets = {
+            'name': TextInput(attrs={'class': 'form-control'}),
+            'deadline': DateInput(attrs={'class': 'form-control datepicker'}),
+            'goal_kudos': NumberInput(attrs={'class': 'form-control'}),
+            'status':  Select(attrs={'class': 'form-control'})
+        }
+        help_texts = {
+
+        }
+
+    def __init_(self, *args, **kwargs):
+        super(Project, self).__init__(*args, **kwargs)
+        self.fields['name'].required = True
+        self.fields['goal_kudos'].required = True

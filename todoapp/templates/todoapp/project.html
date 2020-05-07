@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+    <div class="page">
+        <form
+                {% if project_id %}
+                    action="{% url 'todoapp:edit_project' goal_id=goal_id project_id=project_id %}"
+                {% else %}
+                    action="{% url 'todoapp:add_new_project' goal_id=goal_id %}"
+                {% endif %}
+                    method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            {% if project_id %}
+                <input class="btn btn-info" type="submit" value="Edit project">
+            {% else %}
+                <input class="btn btn-info" type="submit" value="Add project">
+            {% endif %}
+        </form>
+        <input class="btn btn-info" value="Delete task" onclick="deleteProject({{ project_id }})">
+    </div>
+{% endblock %}

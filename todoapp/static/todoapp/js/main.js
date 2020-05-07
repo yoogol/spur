@@ -29,6 +29,32 @@ function deleteTask(task_id) {
     }
 }
 
+function manageProject(project_id, type, status, onSuccess) {
+    $.ajax({
+        url: '/api/manage_project',
+        data: {
+            'type': type,
+            'project_id': project_id,
+            'status':status
+        },
+        dataType: 'json',
+        success: function(data) {
+            onSuccess(data)
+        }
+    });
+}
+
+function deleteProject(project_id) {
+    manageProject(project_id, 'change_status', 'D', onSuccess)
+    function onSuccess(data) {
+        if(data.hasOwnProperty('redirect_url')) {
+            location.replace(data['redirect_url'])
+        } else {
+            consoel.log("NO")
+        }
+    }
+}
+
 function changeTaskStatus(el) {
     let status = ''
     let task_id = $(el).attr('data-taskid')
