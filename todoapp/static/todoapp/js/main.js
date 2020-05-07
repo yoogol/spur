@@ -50,7 +50,7 @@ function deleteProject(project_id) {
         if(data.hasOwnProperty('redirect_url')) {
             location.replace(data['redirect_url'])
         } else {
-            consoel.log("NO")
+            console.log("NO")
         }
     }
 }

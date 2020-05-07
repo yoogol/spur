@@ -19,6 +19,6 @@
                 <input class="btn btn-info" type="submit" value="Add project">
             {% endif %}
         </form>
-        <input class="btn btn-info" value="Delete task" onclick="deleteProject({{ project_id }})">
+        <input class="btn btn-info" type="button" value="Delete project" onclick="deleteProject({{ project_id }})">
     </div>
 {% endblock %}

@@ -26,6 +26,7 @@ def manage_project(request):
         project_id = request.GET.get('project_id')
         project = Project.objects.get(id=project_id)
         if request.GET.get('type') == 'change_status':
+            print(request.GET.get('status'))
             project.status = request.GET.get('status')
             project.save()
         response_data = {

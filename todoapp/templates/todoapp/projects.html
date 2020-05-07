@@ -15,7 +15,9 @@
         </div>
         <div class="list project">
             {% for project_data in projects_data %}
-                {% include 'todoapp/subtemplates/project.html' with project_data=project_data %}
+                {% if not project_data.project.status == 'D' %}
+                    {% include 'todoapp/subtemplates/project.html' with project_data=project_data %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>

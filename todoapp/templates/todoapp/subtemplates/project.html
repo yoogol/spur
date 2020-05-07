@@ -2,7 +2,9 @@
     <div class="left">
         <div class="drawer-horizontal">
             <div class="title">
-                {{ project_data.project.name }}
+                <a href="{% url 'todoapp:edit_project' goal_id=project_data.project.goal_id project_id=project_data.project.id %}">
+                    {{ project_data.project.name }}
+                </a>
             </div>
             <div class="deadline">
                 {% if project_data.project.deadline %}
