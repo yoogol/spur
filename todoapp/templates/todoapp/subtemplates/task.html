@@ -1,24 +1,28 @@
 
 <div class="row no-gutters align-items-center" id="{{ task.id }}">
+
     <div class="col-1 text-left">
         {% if task.status == "C" %}
             <i data-taskid="{{ task.id }}" style="cursor: pointer;" onclick="changeTaskStatus(this)" class="fa fa-check-square-o checked" aria-hidden="true"></i>
         {% else %}
             <i data-taskid="{{ task.id }}" style="cursor: pointer;" onclick="changeTaskStatus(this)" class="fa fa-square-o unchecked" aria-hidden="true"></i>
         {% endif %}
-{#            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" {% if task.status == "C" %} checked {% endif %} data-taskid="{{ task.id }}" onchange="changeTaskStatus(this)">#}
     </div>
+
     <div class="col my-1 align-items-center">
             <div class="ml-1">
                 <span class="task-name" {% if task.status == 'C' %} style="text-decoration: line-through" {% endif %}>{{ task.name }}</span>
             </div>
     </div>
+
     <div class="col-1 text-right align-middle">
         <a href="{% url 'todoapp:edit_task' project_id=task.project_id task_id=task.id %}">
            <i class="fas fa-pencil-alt"></i>
         </a>
     </div>
+
 </div>
+
 <div class="row no-gutters font-weight-light align-middle" style="font-size: 0.7em">
     <div class="col offset-1">
         {% if task.not_until %}

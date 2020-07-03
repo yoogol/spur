@@ -13,7 +13,18 @@
         <div class="mt-2">
             {% for task in today_data.tasks %}
                 {% if not task.status == "D" %}
-                    {% include 'todoapp/subtemplates/task.html' with task=task %}
+                    <div class="card">
+                        <div class="card-body">
+{#                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>#}
+                            <div class="row no-gutters font-weight-light align-bottom" style="font-size: 0.5em">
+                                <div class="col offset-1 pl-1">
+                                    <a href="{% url 'todoapp:show_projects_for_goal' goal_id=task.project.goal.id %}">{{ task.project.goal.name }}</a><span> > </span><a href="{% url 'todoapp:show_projects_for_goal' goal_id=task.project.goal.id %}">{{ task.project.name }}</a>
+                                </div>
+                            </div>
+                            {% include 'todoapp/subtemplates/task.html' with task=task %}
+                        </div>
+                    </div>
+
                 {% endif %}
             {% endfor %}
         </div>
