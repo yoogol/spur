@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 {% load static %}
 {% block content %}
-    <div class="page">
+    <div class="row card-body">
         <form
                 {% if project_id %}
                     action="{% url 'todoapp:edit_project' goal_id=goal_id project_id=project_id %}"

@@ -1,19 +1,18 @@
 {% extends "base_generic.html" %}
 {% block content %}
-    <div class="page projects">
-        <div class="drawer-horizontal">
-            <div class="goal">
-                <div class="title">{{ goal.name }}</div>
-                <div class="subtitle">to achive this I will:</div>
-            </div>
-            <div class="goal-score">
-{#                {{ goal.order_number }}#}
-                <a href="{% url 'todoapp:add_new_project' goal_id=goal.id  %}">
-                   <i class="fas fa-plus-circle"></i>
-                </a>
-            </div>
-        </div>
-        <div class="list project">
+    <ol class="card-header breadcrumb row">
+        <li class="breadcrumb-item" aria-current="page">
+            <a href="{% url 'todoapp:my-goals' %}">Goals</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{ goal.name }}</li>
+        <li class="ml-auto">
+            <a href="{% url 'todoapp:add_new_project' goal_id=goal.id  %}">
+               Add project <i class="fas fa-plus-circle"></i>
+            </a>
+        </li>
+    </ol>
+    <div class="card-body container">
+        <div>
             {% for project_data in projects_data %}
                 {% if not project_data.project.status == 'D' %}
                     {% include 'todoapp/subtemplates/project.html' with project_data=project_data %}
@@ -21,5 +20,6 @@
             {% endfor %}
         </div>
     </div>
+
 
 {% endblock %}

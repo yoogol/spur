@@ -21,7 +21,7 @@
 <body>
   <div>
     {% block navbar %}
-        <nav class="navbar navbar-expand-sm navbar-light bg-light" style="display: flex; justify-content: space-between;">
+{#        <nav class="navbar navbar-expand-sm navbar-light bg-light" style="display: flex; justify-content: space-between;">#}
 {#            <a class="nav-item" href="#">#}
 {#                <img src="{% static 'img/Logo.png' %}" width="60" style="padding:5px" class="d-inline-block align-top" alt="">#}
 {#            </a>#}
@@ -44,13 +44,13 @@
 {#            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
 {#                <span class="navbar-toggler-icon"></span>#}
 {#            </button>#}
-            {% if user.is_authenticated %}
-                <div style="margin: 0px 30px; color: gray;">
-                    <a href="{% url 'todoapp:my-goals' %}" >Hi, {{ user.first_name|title }}</a>
-                </div>
-                <button type="button" class="btn btn-light" onclick="history.back()">Back</button>
-            {% endif %}
-        </nav>
+{#            {% if user.is_authenticated %}#}
+{#                <div style="margin: 0px 30px; color: gray;">#}
+{#                    <a href="{% url 'todoapp:my-goals' %}" >Hi, {{ user.first_name|title }}</a>#}
+{#                </div>#}
+{#                <button type="button" class="btn btn-light" onclick="history.back()">Back</button>#}
+{#            {% endif %}#}
+{#        </nav>#}
 {#        {% if user.is_authenticated %}#}
 {#                {% for notification in user.userinfo.unviewed_notifications %}#}
 {#                    {% include 'giftsharingapp/menu-level-templates/subtemplates/notification.html' with notification=notification %}#}
@@ -60,11 +60,12 @@
 {#        {% endif %}#}
     {% endblock %}
 
-    <div class="core-element">
-      <div class="">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col card" style="max-width: 414px; min-width: 200px">
           {% block content %}
           {% endblock %}
-
+        </div>
           {% block javascript %}
                 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

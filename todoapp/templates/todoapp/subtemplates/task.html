@@ -1,49 +1,32 @@
 
-    <tr id="{{ task.id }}">
-        <td class="checkbox">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" {% if task.status == "C" %} checked {% endif %} data-taskid="{{ task.id }}" onchange="changeTaskStatus(this)">
-        </td>
-{#        <td class="number">#}
-{#            {{ task.order_within_project }}.#}
-{#        </td>#}
-        <td class="title">
-            <span class="title-name" {% if task.status == 'C' %} style="text-decoration: line-through" {% endif %}>{{ task.name }}</span>
-            <div class="detail-date">
-                {% if task.not_until %}
-                    <span class="notuntil">not until {{ task.not_until|date:"M j" }}</span>
-                {% endif %}
-                {% if task.deadline %}
-                    <span class="doby">do by {{ task.deadline|date:"M j" }}</span>
-                {% endif %}
-
+<div class="row no-gutters align-items-center" id="{{ task.id }}">
+    <div class="col-1 text-left">
+        {% if task.status == "C" %}
+            <i data-taskid="{{ task.id }}" style="cursor: pointer;" onclick="changeTaskStatus(this)" class="fa fa-check-square-o checked" aria-hidden="true"></i>
+        {% else %}
+            <i data-taskid="{{ task.id }}" style="cursor: pointer;" onclick="changeTaskStatus(this)" class="fa fa-square-o unchecked" aria-hidden="true"></i>
+        {% endif %}
+{#            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" {% if task.status == "C" %} checked {% endif %} data-taskid="{{ task.id }}" onchange="changeTaskStatus(this)">#}
+    </div>
+    <div class="col my-1 align-items-center">
+            <div class="ml-1">
+                <span class="task-name" {% if task.status == 'C' %} style="text-decoration: line-through" {% endif %}>{{ task.name }}</span>
             </div>
-        </td>
-        <td class="duration">
-            {{ task.duration_string }}
-        </td>
-        <td class="edit-button">
-            <a href="{% url 'todoapp:edit_task' project_id=task.project_id task_id=task.id %}">
-               <i class="fas fa-pencil-alt"></i>
-            </a>
-        </td>
-
-    </tr>
-
-{#<div class="drawer-horizontal">#}
-{#    <div class="number">#}
-{#        {{ task.order_within_project }}.#}
-{#    </div>#}
-{#    <div class="title">#}
-{#        {{ task.name }}#}
-{#    </div>#}
-{#    <div class="duration">#}
-{#        {{ task.duration_minutes }}#}
-{#    </div>#}
-{#    <div class="deadline">#}
-{#        {{ task.deadline }}#}
-{#    </div>#}
-{#    <div class="checkbox">#}
-{#        {{ task.status }}#}
-{#    </div>#}
-{##}
-{#</div>#}
+    </div>
+    <div class="col-1 text-right align-middle">
+        <a href="{% url 'todoapp:edit_task' project_id=task.project_id task_id=task.id %}">
+           <i class="fas fa-pencil-alt"></i>
+        </a>
+    </div>
+</div>
+<div class="row no-gutters font-weight-light align-middle" style="font-size: 0.7em">
+    <div class="col offset-1">
+        {% if task.not_until %}
+            <i class="fa fa-calendar-times-o mr-1" aria-hidden="true"></i><span class="mr-2">not until {{ task.not_until|date:"M j" }}</span>
+        {% endif %}
+        {% if task.deadline %}
+            <i class="fa fa-calendar mx-1" aria-hidden="true"></i><span class="mr-2">do by {{ task.deadline|date:"M j" }}</span>
+        {% endif %}
+        <i class="fa fa-clock-o mx-1" aria-hidden="true"></i><span class="mr-2">{{ task.duration_string }}</span>
+    </div>
+</div>

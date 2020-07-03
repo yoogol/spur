@@ -11,6 +11,7 @@ urlpatterns = [
     path('tasks/edit_task/<int:project_id>/<int:task_id>/', views.edit_task, name='edit_task'),
     path('projects/edit_project/<int:goal_id>/',views.edit_project, name='add_new_project'),
     path('projects/edit_project/<int:goal_id>/<int:project_id>',views.edit_project, name='edit_project'),
+    path('today/', views.show_todays_tasks, name='show_todays_tasks'),
 
 
     # path('tasks/edit/<int:task_id>', views.edit_task, name='edit_task'),

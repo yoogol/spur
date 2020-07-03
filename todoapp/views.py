@@ -18,6 +18,7 @@ import os
 from django.views import generic, View
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy, reverse
+from .calculations import calculate_todays_tasks
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -35,6 +36,11 @@ def my_goals(request):
     goals = Goal.objects.filter(owner=request.user).order_by('order_number')
     return render(request, 'todoapp/goals.html', {'goals': goals})
     # return render(request, 'todoapp/goals.html')
+
+
+def show_todays_tasks(request):
+    today_data = calculate_todays_tasks()
+    return render(request, 'todoapp/tasks_for_today.html', {'today_data': today_data})
 
 
 def show_projects_for_goal(request, goal_id):
@@ -91,7 +97,7 @@ def edit_project(request, goal_id=None, project_id=None):
             new_project = project_form.save()
             return HttpResponseRedirect(reverse_lazy('todoapp:show_projects_for_goal', kwargs={'goal_id': project.goal_id},
                                                      current_app='todoapp'))
-    return render(request, 'todoapp/project.html', {'form': project_form, 'goal_id': goal_id, 'project_id': project_id})
+    return render(request, 'todoapp/edit_project.html', {'form': project_form, 'goal_id': goal_id, 'project_id': project_id})
 
 def signup(request, token=None):
     logout(request)

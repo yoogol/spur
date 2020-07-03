@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_save
+from django.utils import timezone
 
 class UserInfo(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='userinfo')
@@ -74,6 +75,23 @@ class Task(models.Model):
         choices=STATUS,
         default=ACTIVE
     )
+
+    @property
+    def score(self):
+        #     tasks with deadline
+        days_to_deadline = None
+        # if self.deadline:
+        #     # count days to deadline
+        #     now = timezone.now()
+        #     delta = self.deadline - now
+        #     days_to_deadline = delta.days
+
+        if self.project.goal_kudos:
+            score = self.project.goal.order_number * self.project.goal_kudos
+        else:
+            score = self.project.goal.order_number
+
+        return score
 
     @property
     def duration_string(self):

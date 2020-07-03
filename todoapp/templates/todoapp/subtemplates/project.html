@@ -1,37 +1,31 @@
-<div class="drawer-horizontal">
-    <div class="left">
-        <div class="drawer-horizontal">
-            <div class="title">
+
+<div class="card row">
+    <div class="card-body">
+        <div class="row no-gutters align-items-center" >
+            <div class="col">
                 <a href="{% url 'todoapp:edit_project' goal_id=project_data.project.goal_id project_id=project_data.project.id %}">
-                    {{ project_data.project.name }}
+                    <b>{{ project_data.project.name }}</b>
                 </a>
             </div>
-            <div class="deadline">
+            <div class="col-2 ml-2">
                 {% if project_data.project.deadline %}
                     {{ project_data.project.deadline|date:"M j" }}
                 {% endif %}
             </div>
-        </div>
-        <div class="drawer-horizontal">
-            <div class="subtitle">
-                by taking these steps-by-step actions:
+            <div class="col-1 text-right" >
+                <a href="{% url 'todoapp:add_new_task' project_id=project_data.project.id  %}">
+                   <i class="fas fa-plus-circle"></i>
+                </a>
             </div>
         </div>
-
-    </div>
-    <div class="right">
-{#        <i class="fas fa-chevron-down"></i>#}
-        <a href="{% url 'todoapp:add_new_task' project_id=project_data.project.id  %}">
-           <i class="fas fa-plus-circle"></i>
-        </a>
-
-
+        {% if project_data.tasks %}
+            <div class="mt-2">
+                {% for task in project_data.tasks %}
+                    {% if not task.status == "D" %}
+                        {% include 'todoapp/subtemplates/task.html' with task=task %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </div>
-<table class="list task">
-    {% for task in project_data.tasks %}
-        {% if not task.status == "D" %}
-            {% include 'todoapp/subtemplates/task.html' with task=task %}
-        {% endif %}
-    {% endfor %}
-</table>

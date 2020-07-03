@@ -1,28 +1,32 @@
 {% extends "base_generic.html" %}
 {% load static %}
 {% block content %}
-    <div class="page goals">
-        <div class="title">
-            Good morning!
-        </div>
-        <div class="subtitle">
-            Stay focused on your goals
-        </div>
-        <ol class="list">
-            {% for goal in goals %}
-                <li class="item">
-                    <a href="{% url 'todoapp:show_projects_for_goal' goal_id=goal.id %}">
-                        {{ goal.name }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ol>
-        <div class="button-drawer">
-            <button type="button" class="btn btn-success">Conquer Today</button>
-        </div>
-        <div class="button-drawer">
-            <button type="button" class="btn btn-link">Edit Goals</button>
-        </div>
+
+    <ol class="card-header breadcrumb row">
+        <li class="breadcrumb-item active" aria-current="page">Goals</li>
+    </ol>
+    <div class="card-body">
+        {% for goal in goals %}
+            <div class="card container">
+                <div class="row card-body">
+                    <div class="col-2">
+                        <span>{{ goal.order_number }}</span>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'todoapp:show_projects_for_goal' goal_id=goal.id %}">
+                            {{ goal.name }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mx-auto">
+        <a href="{% url 'todoapp:show_todays_tasks' %}" type="button" class="btn btn-dark">Conquer Today</a>
+    </div>
+    <div class="row mx-auto">
+        <button type="button" class="btn btn-link">Edit Goals</button>
     </div>
 
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+    <ol class="card-header breadcrumb row">
+        <li class="breadcrumb-item" aria-current="page">
+            <a href="{% url 'todoapp:my-goals' %}">Goals</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Today</li>
+    </ol>
+
+
+    <div class="card-body" >
+        <div class="mt-2">
+            {% for task in today_data.tasks %}
+                {% if not task.status == "D" %}
+                    {% include 'todoapp/subtemplates/task.html' with task=task %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
