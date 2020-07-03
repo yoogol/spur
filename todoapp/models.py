@@ -87,7 +87,7 @@ class Task(models.Model):
         #     days_to_deadline = delta.days
 
         if self.project.goal_kudos:
-            score = self.project.goal.order_number * self.project.goal_kudos
+            score = self.project.goal.order_number / self.project.goal_kudos
         else:
             score = self.project.goal.order_number
 
