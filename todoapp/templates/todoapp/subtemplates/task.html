@@ -11,7 +11,7 @@
 
     <div class="col my-1 align-items-center">
             <div class="ml-1">
-                <span class="task-name" {% if task.status == 'C' %} style="text-decoration: line-through" {% endif %}>{{ task.name }}</span>
+                <span class="task-name" {% if task.status == 'C' %} style="text-decoration: line-through" {% endif %}>{{ task.name }} {{ task.score }}</span>
             </div>
     </div>
 
@@ -25,6 +25,7 @@
 
 <div class="row no-gutters font-weight-light align-middle" style="font-size: 0.7em">
     <div class="col offset-1">
+
         {% if task.not_until %}
             <i class="fa fa-calendar-times-o mr-1" aria-hidden="true"></i><span class="mr-2">not until {{ task.not_until|date:"M j" }}</span>
         {% endif %}

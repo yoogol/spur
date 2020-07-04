@@ -78,18 +78,20 @@ class Task(models.Model):
 
     @property
     def score(self):
-        #     tasks with deadline
-        days_to_deadline = None
-        # if self.deadline:
-        #     # count days to deadline
-        #     now = timezone.now()
-        #     delta = self.deadline - now
-        #     days_to_deadline = delta.days
-
         if self.project.goal_kudos:
             score = self.project.goal.order_number / self.project.goal_kudos
         else:
             score = self.project.goal.order_number
+
+        days_to_deadline = None
+        if self.deadline:
+            # count days to deadline
+            now = timezone.now()
+            delta = self.deadline - now
+            days_to_deadline = delta.days
+            print(days_to_deadline)
+            print(self.name)
+            score = score * (days_to_deadline/10)
 
         return score
 
