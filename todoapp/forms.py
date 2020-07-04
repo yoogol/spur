@@ -34,7 +34,7 @@ class Task(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(Task, self).__init__(*args, **kwargs)
-        self.fields['order_within_project'].required = True
+        # self.fields['order_within_project'].required = True
         self.fields['name'].required = True
         self.fields['duration_minutes'].required = True
 

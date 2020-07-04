@@ -6,13 +6,18 @@
         </li>
         <li class="breadcrumb-item active" aria-current="page">{{ goal.name }}</li>
         <li class="ml-auto">
-            <a href="{% url 'todoapp:add_new_project' goal_id=goal.id  %}">
-               Add project <i class="fas fa-plus-circle"></i>
-            </a>
+            <a href="{% url 'todoapp:show_todays_tasks' %}">Today</a>
         </li>
     </ol>
+    <div class="ml-auto mr-1">
+        <a class="" href="{% url 'todoapp:add_new_project' goal_id=goal.id  %}">
+           Add project <i class="fas fa-plus-circle"></i>
+        </a>
+    </div>
+
     <div class="card-body container">
-        <div>
+
+        <div class="card-text">
             {% for project_data in projects_data %}
                 {% if not project_data.project.status == 'D' %}
                     {% include 'todoapp/subtemplates/project.html' with project_data=project_data %}

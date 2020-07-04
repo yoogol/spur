@@ -112,8 +112,6 @@ class Task(models.Model):
         all_tasks = Task.objects.filter(project=self.project, status__in=['A', 'C']).order_by(
             'order_within_project').exclude(id=self.id)
         other_tasks_count = all_tasks.count() + 1
-        print(other_tasks_count)
-        print(this_task_order)
         if this_task_order > other_tasks_count > 0:
             this_task_order = other_tasks_count
             self.order_within_project = other_tasks_count
