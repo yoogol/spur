@@ -1,5 +1,5 @@
 
-<div class="row no-gutters align-items-center" id="{{ task.id }}">
+<div class="row no-gutters align-items-center" id="{{ task.id }}" style="{% if task.status == 'C' %} color: #b1e4b1 {% endif %}">
 
     <div class="col-1 text-left">
         {% if task.status == "C" %}
@@ -23,7 +23,7 @@
 
 </div>
 
-<div class="row no-gutters font-weight-light align-middle" style="font-size: 0.7em">
+<div class="row no-gutters font-weight-light align-middle" style="font-size: 0.7em; {% if task.status == 'C' %} color: #b1e4b1 {% endif %}">
     <div class="col offset-1">
 
         {% if task.not_until %}
