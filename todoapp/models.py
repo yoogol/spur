@@ -105,15 +105,22 @@ class Task(models.Model):
         else:
             return ''
 
+    @property
+    def follows_task_with_notuntil(self):
+        if Task.objects.filter(status="A", project=self.project, order_within_project__lt=self.order_within_project, not_until__isnull=False).exists():
+            return True
+        else:
+            return False
+
     def rearrange_tasks_order(self):
-        if not self.order_within_project:
-            self.order_within_project = 1
-            self.save()
+        # if not self.order_within_project:
+        #     self.order_within_project = 1
+        #     self.save()
         this_task_order = self.order_within_project
         all_tasks = Task.objects.filter(project=self.project, status__in=['A', 'C']).order_by(
             'order_within_project').exclude(id=self.id)
         other_tasks_count = all_tasks.count() + 1
-        if this_task_order > other_tasks_count > 0:
+        if not self.order_within_project or this_task_order > other_tasks_count > 0:
             this_task_order = other_tasks_count
             self.order_within_project = other_tasks_count
             self.save()
