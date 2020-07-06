@@ -7,6 +7,7 @@ from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone
 
 class UserInfo(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='userinfo')
@@ -107,10 +108,23 @@ class Task(models.Model):
 
     @property
     def follows_task_with_notuntil(self):
-        if Task.objects.filter(status="A", project=self.project, order_within_project__lt=self.order_within_project, not_until__isnull=False).exists():
+        now = timezone.now()
+        if Task.objects.filter(status="A", project=self.project, order_within_project__lt=self.order_within_project, not_until__isnull=False, not_until__lt=now).exists():
             return True
         else:
             return False
+
+    def is_past_due(self):
+        now = timezone.now()
+        if self.deadline:
+            return now > self.deadline
+        return False
+
+    def not_until_expired_or_none(self):
+        now = timezone.now()
+        if self.not_until:
+            return now >= self.not_until
+        return True
 
     def rearrange_tasks_order(self):
         # if not self.order_within_project:
