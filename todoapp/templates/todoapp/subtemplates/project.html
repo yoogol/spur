@@ -3,23 +3,47 @@
     <div class="card-body">
         <div class="row no-gutters align-items-center">
             <div class="col">
-                <a href="{% url 'todoapp:edit_project' goal_id=project_data.project.goal_id project_id=project_data.project.id %}">
+                <a data-toggle="collapse" href="#collapse-{{ project_data.project.id }}" role="button" aria-expanded="false" aria-controls="collapse-{{ project_data.project.id }}">
                     <b>{{ project_data.project.name }}</b>
                 </a>
+
+{#                <a href="{% url 'todoapp:edit_project' goal_id=project_data.project.goal_id project_id=project_data.project.id %}">#}
+{#                    <b>{{ project_data.project.name }}</b>#}
+{#                </a>#}
             </div>
-            <div class="col-2 ml-2">
-                {% if project_data.project.deadline %}
-                    {{ project_data.project.deadline|date:"M j" }}
-                {% endif %}
+{#            <div class="col-2 ml-2">#}
+{#                {% if project_data.project.deadline %}#}
+{#                    {{ project_data.project.deadline|date:"M j" }}#}
+{#                {% endif %}#}
+{#            </div>#}
+            <div class="col-1 offset-1 mr-4 text-center border border-success rounded-circle" >
+                {{ project_data.project.goal_kudos }}
+{#                <a href="{% url 'todoapp:add_new_task' project_id=project_data.project.id  %}">#}
+{#                   <i class="fas fa-plus-circle"></i>#}
+{#                </a>#}
+{#                <a href="{% url 'todoapp:edit_project' goal_id=project_data.project.goal_id project_id=project_data.project.id %}">#}
+{#                    <i class="fas fa-pencil-alt"></i>#}
+{#                </a>#}
             </div>
-            <div class="col-1 text-right" >
-                <a href="{% url 'todoapp:add_new_task' project_id=project_data.project.id  %}">
-                   <i class="fas fa-plus-circle"></i>
-                </a>
+        </div>
+        <div class="row no-gutters font-weight-light align-middle justify-content-between" style="font-size: 0.7em;">
+            <div class="col">
+                <a href="{% url 'todoapp:edit_project' goal_id=project_data.project.goal_id project_id=project_data.project.id %}"><span class="mr-2"><i class="fas fa-pencil-alt"></i> Edit project</span></a>
+                <a href="{% url 'todoapp:add_new_task' project_id=project_data.project.id  %}"><span class="mr-2"><i class="fas fa-plus-circle"></i> Add task </span></a>
+{#                {% if task.not_until %}#}
+{#                    <i class="fa fa-calendar-times-o mr-1" aria-hidden="true"></i><span class="mr-2">not until {{ task.not_until|date:"M j" }}</span>#}
+{#                {% endif %}#}
+{#                {% if task.deadline %}#}
+{#                    <i class="fa fa-calendar mx-1" aria-hidden="true"></i><span class="mr-2">do by {{ task.deadline|date:"M j" }}</span>#}
+{#                {% endif %}#}
+{#                <i class="fa fa-clock-o mx-1" aria-hidden="true"></i><span class="mr-2">{{ task.duration_string }}</span>#}
+            </div>
+            <div class="col-auto">
+                {% if project_data.project.deadline %}<span class="mr-2"><i class="fa fa-calendar mx-1" aria-hidden="true"></i> Due {{ project_data.project.deadline|date:"M j" }}</span>{% endif %}
             </div>
         </div>
         {% if project_data.tasks %}
-            <div class="mt-2">
+            <div class="mt-2 collapse" id="collapse-{{ project_data.project.id }}">
                 {% for task in project_data.tasks %}
                     {% if not task.status == "D" %}
                         {% include 'todoapp/subtemplates/task.html' with task=task %}

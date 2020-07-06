@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class UserInfo(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='userinfo')
@@ -39,7 +40,7 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     deadline = models.DateTimeField(blank=True, null=True)
-    goal_kudos = models.IntegerField(blank=True, null=True)
+    goal_kudos = models.PositiveIntegerField(blank=True, null=True, default=1, validators=[MinValueValidator(1), MaxValueValidator(100)])
     COMPLETE = 'C'
     ACTIVE = 'A'
     DELETED = 'D'
