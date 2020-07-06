@@ -40,7 +40,7 @@ def calculate_todays_tasks():
 
     projects = Project.objects.all()
     tasks = []
-    not_until_tasks = Task.objects.filter(not_until__isnull=False, status='A')
+    not_until_tasks = Task.objects.filter(not_until__isnull=False, status='A', not_until__gt=now)
     not_until_tasks_plus_ids = []
     for task in not_until_tasks:
         not_until_tasks_plus_ids.extend(Task.objects.filter(project=task.project, order_within_project__gte=task.order_within_project).values_list('id',flat=True))
