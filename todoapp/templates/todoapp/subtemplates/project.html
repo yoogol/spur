@@ -43,7 +43,7 @@
             </div>
         </div>
         {% if project_data.tasks %}
-            <div class="mt-2 collapse" id="collapse-{{ project_data.project.id }}">
+            <div class="mt-2 collapse show" id="collapse-{{ project_data.project.id }}">
                 {% for task in project_data.tasks %}
                     {% if not task.status == "D" %}
                         {% include 'todoapp/subtemplates/task.html' with task=task %}

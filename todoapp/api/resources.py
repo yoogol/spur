@@ -49,6 +49,7 @@ def manage_task(request):
         task = Task.objects.get(id=task_id)
         if request.GET.get('type') == 'change_status':
             task.status = request.GET.get('status')
+            task.order_within_project = 0
             task.save()
         response_data = {
             'status': 'ok',
