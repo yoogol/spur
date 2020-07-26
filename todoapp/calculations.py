@@ -50,7 +50,7 @@ def calculate_todays_tasks():
         if project_tasks.first():
             tasks.append(project_tasks.first())
 
-    tasks = sorted(tasks, key=lambda t: t.score)[:5]
+    tasks = sorted(tasks, key=lambda t: t.score)
 
     # tasks = Task.objects.filter(status='A')
     # task_ids_to_exclude = []
