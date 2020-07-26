@@ -46,7 +46,7 @@ def show_todays_tasks(request):
 def show_projects_for_goal(request, goal_id):
     projects_data = []
     goal = Goal.objects.get(id=goal_id)
-    goal_projects = goal.goal_projects.all().order_by('-goal_kudos')
+    goal_projects = goal.goal_projects.filter(status="A").order_by('-goal_kudos')
     for project in goal_projects:
         project_data = {
             'project': project,
